@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import User from '../entities/User'
-import { UserRepository, UserWithID } from './UserRepository'
+import { UserMessage, UserRepository, UserWithID } from './UserRepository'
 
 const UserModel = mongoose.model('User', new mongoose.Schema({
 	_id: {
@@ -9,7 +9,11 @@ const UserModel = mongoose.model('User', new mongoose.Schema({
   },
 	username: String, 
 	email: String,
-	password: String
+	password: String,
+  message: {
+    type: String,
+    default: ''
+  }
 }))
 
 class UserRepositoryMongoose implements UserRepository {
@@ -62,6 +66,22 @@ class UserRepositoryMongoose implements UserRepository {
 
 		return userModel ? userModel.toObject() : undefined
 	}
+
+  async sendMessage(id: string, message: string): Promise<void> {
+    const userModel = await UserModel.findByIdAndUpdate(
+      id,
+      { $set: { message: message } },
+      { new: true }
+    )
+
+    return
+  }
+
+  async findAllMessages(): Promise<UserMessage[]> {
+    const userModel = await UserModel.find().select('username message').limit(10).exec()
+
+    return userModel ? userModel.map(user => user.toObject()) : []
+  }
 }
 
 export { UserRepositoryMongoose }

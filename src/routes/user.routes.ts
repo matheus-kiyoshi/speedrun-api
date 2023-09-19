@@ -43,6 +43,20 @@ class UserRoutes {
 			CheckToken,
 			this.userController.updatePassword.bind(this.userController)
 		)
+		this.router.post(
+			'/profile/message',
+			CheckToken,
+			this.userController.sendMessage.bind(this.userController)
+		)
+		this.router.patch(
+			'/profile/message',
+			CheckToken,
+			this.userController.editMessage.bind(this.userController)
+		)
+		this.router.get(
+			'/profile/message',
+			this.userController.findAllMessages.bind(this.userController)
+		)
 	}
 }
 

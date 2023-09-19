@@ -141,6 +141,28 @@ class UserUseCases {
 		const user = await this.userRepository.findUser(username)
 		return user
 	}
+
+	async sendMessage(username: string, message: string) {
+		if (!username) {
+			throw new HttpException('Username is required', 400)
+		}
+		if (!message) {
+			throw new HttpException('Message is required', 400)
+		}
+
+		const user = await this.userRepository.findUser(username)
+		if (!user) {
+			throw new HttpException('User not found', 404)
+		}
+
+		const result = await this.userRepository.sendMessage(user._id, message)
+		return result
+	}
+
+	async findAllMessages() {
+		const messages = await this.userRepository.findAllMessages()
+		return messages
+	}
 }
 
 export { UserUseCases }

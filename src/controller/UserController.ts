@@ -76,6 +76,39 @@ class UserController {
 			next(error)
 		}
 	}
+
+	async sendMessage(req: Request, res: Response, next: NextFunction) {
+		const { username } = req.user
+		const { message } = req.body
+
+		try {
+			await this.userUseCase.sendMessage(username, message)
+			return res.status(200).json({ message: 'Message sent' })
+		} catch (error) {
+			next(error)
+		}
+	}
+
+	async editMessage(req: Request, res: Response, next: NextFunction) {
+		const { username } = req.user
+		const { message } = req.body
+
+		try {
+			await this.userUseCase.sendMessage(username, message)
+			return res.status(200).json({ message: 'Message updated' })
+		} catch (error) {
+			next(error)
+		}
+	}
+
+	async findAllMessages(req: Request, res: Response, next: NextFunction) {
+		try {
+			const messages = await this.userUseCase.findAllMessages()
+			return res.status(200).json(messages)
+		} catch (error) {
+			next(error)
+		}
+	}
 }
 
 export { UserController }
