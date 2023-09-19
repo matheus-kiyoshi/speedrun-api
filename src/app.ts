@@ -4,10 +4,12 @@ import { connect } from './infra/db'
 import cors from 'cors'
 import 'path'
 import { UserRoutes } from './routes/user.routes'
+import { SpeedRunRoutes } from './routes/speedrun.routes'
 
 class App {
 	public app: Application
 	private userRoutes = new UserRoutes()
+	private runsRoutes = new SpeedRunRoutes()
 	constructor() {
 		this.app = express()
 		this.middlewaresInitialize()
@@ -17,7 +19,8 @@ class App {
 	}
 
 	private initializeRoutes() {
-		this.app.use('/api', this.userRoutes.router)
+		this.app.use('/api/users', this.userRoutes.router)
+		this.app.use('/api/runs', this.runsRoutes.router)
 	}
 
 	private interceptionError() {

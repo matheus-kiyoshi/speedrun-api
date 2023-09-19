@@ -43,24 +43,6 @@ class UserRoutes {
 			CheckToken,
 			this.userController.updatePassword.bind(this.userController)
 		)
-		this.router.post(
-			'/users/speedrun',
-			CheckToken,
-			this.userController.registerSpeedRun.bind(this.userController)
-		)
-		this.router.get(
-			'/users/speedrun',
-			this.userController.findAllRuns.bind(this.userController)
-		)
-		this.router.delete(
-			'/users/speedrun/:id',
-			CheckToken,
-			this.userController.deleteSpeedRun.bind(this.userController)
-		)
-		this.router.get(
-			'/users/speedrun/:id',
-			this.userController.findSpeedRunById.bind(this.userController)
-		)
 	}
 }
 
