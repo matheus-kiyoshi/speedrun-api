@@ -1,5 +1,4 @@
 import { Router } from "express"
-import CheckToken from "../middlewares/CheckToken.middleware"
 import { SpeedRunController } from "../controller/SpeedRunController"
 import { SpeedRunRepositoryMongoose } from "../repositories/SpeedRunRepositoryMongoose"
 import { SpeedRunCases } from "../UseCase/SpeedRunUseCases"
@@ -25,11 +24,6 @@ class SpeedRunRoutes {
 		this.router.get(
 			'/speedrun',
 			this.speedRunController.findAllRuns.bind(this.speedRunController)
-		)
-		this.router.delete(
-			'/speedrun/:id',
-			CheckToken,
-			this.speedRunController.deleteSpeedRun.bind(this.speedRunController)
 		)
 		this.router.get(
 			'/speedrun/:id',
