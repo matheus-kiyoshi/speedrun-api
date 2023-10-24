@@ -21,13 +21,8 @@ class SpeedRunCases {
 			throw new HttpException('Time must be a number', 400)
 		}
 
-		const user = await this.userRepository.findByUsername(username)
-		if (!user) {
-			throw new HttpException('User not found', 404)
-		}
-
 		const run = {
-			user: user.username,
+			user: username,
 			time: timer
 		}
 
