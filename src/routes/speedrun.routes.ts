@@ -20,7 +20,6 @@ class SpeedRunRoutes {
 	initRoutes() {
 		this.router.post(
 			'/speedrun/register',
-			CheckToken,
 			this.speedRunController.registerSpeedRun.bind(this.speedRunController)
 		)
 		this.router.get(

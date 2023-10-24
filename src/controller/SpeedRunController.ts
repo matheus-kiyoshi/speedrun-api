@@ -5,8 +5,7 @@ class SpeedRunController {
 	constructor(private speedRunUseCase: SpeedRunCases) {}
 
 	async registerSpeedRun(req: Request, res: Response, next: NextFunction) {
-		const { username } = req.user
-		const { time } = req.body
+		const { username, time } = req.body
 
 		try {
 			await this.speedRunUseCase.registerSpeedRun(username, time)
