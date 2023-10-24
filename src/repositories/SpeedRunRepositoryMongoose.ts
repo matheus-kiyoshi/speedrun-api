@@ -3,10 +3,6 @@ import Run from '../entities/Run'
 import { SpeedRunRepository } from './SpeedRunRepository'
 
 const RunModel = mongoose.model('Run', new mongoose.Schema({
-	_id: {
-		type: String,
-		default: new mongoose.Types.ObjectId().toString()
-	},
 	user: {
 		type: String,
 		ref: 'User',
