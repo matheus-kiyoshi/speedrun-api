@@ -24,7 +24,7 @@ class SpeedRunRepositoryMongoose implements SpeedRunRepository {
 	}
 
 	async findAllRuns(skip: number): Promise<Run[]> {
-		const runModel = await RunModel.find({}).select('user time').skip(skip).limit(10).exec()
+		const runModel = await RunModel.find({}).select('user time').sort({ time: 1 }).skip(skip).limit(10).exec()
 
 		return runModel
 	}
